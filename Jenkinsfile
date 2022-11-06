@@ -7,7 +7,7 @@ pipeline {
         NEXUS_URL = "192.168.1.200:8081"
         NEXUS_REPOSITORY = "jenkins-repo"
         NEXUS_CREDENTIAL_ID = "deploymentRepo"
-        //DOCKERHUB_CREDENTIALS = credentials('dockerhub')
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub')
     }
     stages {
         stage("Fetching Code From Repository") {
@@ -77,24 +77,23 @@ pipeline {
             }
         }
         
-      //  stage("Building Docker Image") {
-        //        steps{
-         //           sh 'docker build -t $DOCKERHUB_CREDENTIALS_USR/achat .'
-          //      }
-       // }
+      stage("Building Docker Image") {
+                steps{
+                    sh 'docker build -t $DOCKERHUB_CREDENTIALS_USR/achat .'
+                }
+        }
         
-       // stage("Login to DockerHub") {
-              //  steps{
-                    //sh 'sudo chmod 666 /var/run/docker.sock'
-              //      sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-              //  }
-     //   }
+        stage("Login to DockerHub") {
+                steps{
+                    sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                }
+        }
         
-       // stage("Push to DockerHub") {
-            //    steps{
-             //       sh 'docker push $DOCKERHUB_CREDENTIALS_USR/achat'
-             //   }
-      //  }
+        stage("Push to DockerHub") {
+                steps{
+                    sh 'docker push $DOCKERHUB_CREDENTIALS_USR/achat'
+                }
+        }
         
     }
 }
