@@ -6,7 +6,7 @@ pipeline {
         NEXUS_PROTOCOL = "http"
         NEXUS_URL = "192.168.1.200:8081"
         NEXUS_REPOSITORY = "jenkins-repo"
-        NEXUS_CREDENTIAL_ID = "NEXUS_CRED2"
+        NEXUS_CREDENTIAL_ID = "deploymentRepo"
         DOCKERHUB_CREDENTIALS = credentials('dockerhub')
     }
     stages {
