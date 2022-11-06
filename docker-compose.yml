@@ -16,7 +16,7 @@ services:
      - /home/mysql/data:/var/lib/mysql
 
   spring_app:
-    image: 11711911/achat
+    image: sokalee/achat
     container_name: achatspring
     restart: on-failure
     environment:
@@ -25,12 +25,3 @@ services:
      - 8089:8089
     depends_on:
      - mysqldb
-
-  angular_app:
-    image: 11711911/achatfront
-    container_name: achatangular
-    restart: on-failure
-    ports:
-     - 4200:80
-    depends_on:
-     - spring_app
